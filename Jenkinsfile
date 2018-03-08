@@ -3,7 +3,10 @@ pipeline {
     docker {
       image 'node:8.10.0-alpine'
     }
-    
+  }
+  environment {
+        DISABLE_AUTH = 'true'
+        DB_ENGINE    = 'sqlite'
   }
   stages {
     stage('build') {
@@ -25,6 +28,9 @@ pipeline {
         }
         failure {
             echo 'This will run only if failed'
+            mail to: 'xxx-yyy-10078-zyzrqd@qq.com',
+                 subject: "Jenkins Pipeline: ${currentBuild.fullDisplayName}",
+                 body: "Run with ${env.BUILD_URL}"
         }
         unstable {
             echo 'This will run only if the run was marked as unstable'

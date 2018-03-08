@@ -1,0 +1,30 @@
+pipeline {
+    agent any
+    stages {
+        stage('Build') {
+            steps {
+                echo 'I am Building'
+            }
+        }
+        stage('Test') {
+            steps {
+                echo 'I am Testing'
+            }
+        }
+        stage('Deploy - Staging') {
+            steps {
+                echo 'I am Deploying to staging'
+            }
+        }
+        stage('Sanity check') {
+            steps {
+                input "Does the staging environment look ok?"
+            }
+        }
+        stage('Deploy - Production') {
+            steps {
+                echo 'I am Deploying to production'
+            }
+        }
+    }
+}
